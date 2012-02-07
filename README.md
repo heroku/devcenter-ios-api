@@ -130,15 +130,15 @@ With the server up and running, it's time to create the iOS client.
 
 Open up Xcode and select "File > New ▶ > New Project…", or use the keyboard shortcut, `⇧⌘N`.
 
-![New Project 1](ios-sinatra-new-project-1.png)
+![New Project 1](https://github.com/heroku/devcenter-ios-api/raw/assets/ios-sinatra-new-project-1.png)
 
 When prompted to choose a template for your new project, select iOS - Application on the sidebar, and choose the "Empty Application" template. Click "Next" to continue.
 
-![New Project 2](ios-sinatra-new-project-2.png)
+![New Project 2](https://github.com/heroku/devcenter-ios-api/raw/assets/ios-sinatra-new-project-2.png)
 
 In the next step, enter your Product Name, Company Identifier, and Class Prefix (optional). For "Device Family", select "iPhone". Make sure that the checkboxes for "Use Core Data", "Use Automatic Reference Counting", and "Include Unit Tests" are unchecked. Click "Next" to continue.
 
-![New Project 3](ios-sinatra-new-project-3.png)
+![New Project 3](https://github.com/heroku/devcenter-ios-api/raw/assets/ios-sinatra-new-project-3.png)
 
 Finally, select a directory to save your new project to, check the box to create a local Git repository for this project, and click "Create".
 
@@ -185,11 +185,11 @@ Following the instructions from CocoaPods, close `MyApp.xcodeproj` and open `MyA
 
 In Xcode, select "File > New ▶ > New File…", or use the keyboard shortcut, `⌘N`.
 
-![New File 1](ios-sinatra-new-file-1.png)
+![New File 1](https://github.com/heroku/devcenter-ios-api/raw/assets/ios-sinatra-new-file-1.png)
 
 When prompted to choose a template for your new file, select iOS  - Cocoa Touch on the sidebar, and choose the "UIViewController subclass" template. Click "Next" to continue.
 
-![New File 2](ios-sinatra-new-file-2.png)
+![New File 2](https://github.com/heroku/devcenter-ios-api/raw/assets/ios-sinatra-new-file-2.png)
 
 `SushiTableViewController` will download and parse the JSON response from the API, and display the results in a `UITableView`.
 
@@ -316,7 +316,7 @@ In the implementation, import `SushiTableViewController.h`. Then in `application
 
 In Xcode, click the "Run" play button, or use the keyboard shortcut, `⌘R`. If everything worked, your app should be displaying the results fetched from your API.
 
-![Working Application](ios-sinatra-working-application.png)
+![Working Application](https://github.com/heroku/devcenter-ios-api/raw/assets/ios-sinatra-working-application.png)
 
 ## Troubleshooting
 
@@ -328,7 +328,7 @@ If your Sinatra app failed to require a sourcefile, chances are good you’re ru
 
 ### Unable to build Xcode project
 
-![Working Application](ios-sinatra-build-errors.png)
+![Working Application](https://github.com/heroku/devcenter-ios-api/raw/assets/ios-sinatra-build-errors.png)
 
 If your Xcode project uses [ARC](http://clang.llvm.org/docs/AutomaticReferenceCounting.html) and fails to "Build and Run", and the Issue Navigator reports errors such as "ARC forbids explicit message send of 'release'" or "'release' is unavailable", then your project includes source files that cannot be compiled with ARC. 
 
