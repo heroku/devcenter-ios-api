@@ -100,7 +100,7 @@ Create the app on the Cedar stack:
 
 Deploy your code:
 
-    ::term
+    :::term
     $ git push heroku master
     Counting objects: 6, done.
     Delta compression using up to 4 threads.
@@ -156,7 +156,7 @@ CocoaPods runs on [MacRuby](http://www.macruby.org/). If you don't have MacRuby 
     :::term
     $ curl -O http://www.macruby.org/files/MacRuby%200.10.zip
     $ open MacRuby%200.10.zip
-    # open MacRuby\ 0.10/MacRuby\ 0.10.pkg
+    $ open MacRuby\ 0.10/MacRuby\ 0.10.pkg
 
 Now install CocoaPods:
 
