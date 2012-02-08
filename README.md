@@ -69,7 +69,7 @@ Cedar will recognize any app with a `config.ru` as a Rack app and generate a web
 
 Here's a `Procfile` for the sample app we've been working on:
 
-		web: bundle exec ruby api.rb -p $PORT
+    web: bundle exec thin start -p $PORT
 
 Now that you have a `Procfile`, you can start your application with the Foreman gem:
 
