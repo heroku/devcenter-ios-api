@@ -1,8 +1,7 @@
-# Getting Started with iOS Development using Sinatra on Heroku / Cedar
-
 This quickstart will have you up and running with a native iOS application that consumes a web API with [Sinatra](http://www.sinatrarb.com/). For additional resources about Sinatra, please see the [Ruby quickstart](http://devcenter.heroku.com/articles/ruby).
 
-Sample code for the [Sinatra application](https://github.com/heroku/devcenter-ios-api) and the [iOS Client](https://github.com/heroku/devcenter-ios-client) is available on GitHub along with this document. Edits and enhancements are welcome. Just fork the repository, make your changes and send us a pull request.
+{.note}
+Sample code for the [Sinatra application](https://github.com/heroku/devcenter-ios-api) and the [iOS Client](https://github.com/heroku/devcenter-ios-client) is available on GitHub.
 
 ## Prerequisites
 
@@ -12,40 +11,38 @@ Sample code for the [Sinatra application](https://github.com/heroku/devcenter-io
 
 ## Local Workstation Setup
 
-Start by setting up your development environment with the Heroku command-line client and the Git version control system, and then logging into Heroku to upload your ssh public key. If you've used Heroku before and already have a working local setup, skip to the next section.
-
-<table><tr><td><a href="http://toolbelt.herokuapp.com/osx/download">Download OS X package</a></td></tr></table>
+Start by setting up the [Heroku toolbelt](http://toolbelt.herokuapp.com/osx/download) and then logging into Heroku to upload your ssh public key. If you've used Heroku before and already have a working local setup, skip to the next section.
 
 Once installed, you'll have access to the `heroku` command from your command shell. Log in using the email address and password you used when creating your Heroku account:
 
-		:::term
-		$ heroku login
-		Enter your Heroku credentials.
-		Email: adam@example.com
-		Password:
-		Could not find an existing public key.
-		Would you like to generate one? [Yn]
-		Generating new SSH public key.
-		Uploading ssh public key /Users/adam/.ssh/id_rsa.pub
+    :::term
+    $ heroku login
+    Enter your Heroku credentials.
+    Email: adam@example.com
+    Password:
+    Could not find an existing public key.
+    Would you like to generate one? [Yn]
+    Generating new SSH public key.
+    Uploading ssh public key /Users/adam/.ssh/id_rsa.pub
 
 Press enter at the prompt to upload your existing ssh key or create a new one, used for pushing code later on.
 
 ## Write Your Web API App
 
-Following the [client-server model](http://en.wikipedia.org/wiki/Client–server_model), this guide implement both a Sinatra application on the server, and an iOS client that communicates with it.
+Following the [client-server model](http://en.wikipedia.org/wiki/Client–server_model), this guide implements both a Sinatra application on the server, and an iOS client that communicates with it.
 
 Create a Sinatra application using the following example: 
 
-### api.rb
+#### api.rb
 
-		:::ruby
-		require 'sinatra'
-		require 'json'
+    :::ruby
+    require 'sinatra'
+    require 'json'
 
-		get '/sushi.json' do
-			content_type :json
-			return {:sushi => ["Maguro", "Hamachi", "Uni", "Saba", "Ebi", "Sake", "Tai"]}.to_json
-		end
+    get '/sushi.json' do
+      content_type :json
+      return {:sushi => ["Maguro", "Hamachi", "Uni", "Saba", "Ebi", "Sake", "Tai"]}.to_json
+    end
 
 ## Declare Gem Dependencies With Bundler
 
@@ -57,12 +54,12 @@ In local testing, you should be sure to run your app in an isolated environment 
 
 Here's an example `Gemfile` for the Sinatra app created above:
 
-### Gemfile
+#### Gemfile
 
-		:::ruby
-		source :rubygems
-		gem 'sinatra', '1.3.0'
-		gem 'thin', '1.2.7'
+    :::ruby
+    source :rubygems
+    gem 'sinatra', '1.3.0'
+    gem 'thin', '1.2.7'
 
 Run `bundle install` to set up you bundle locally
 
@@ -76,53 +73,57 @@ Here's a `Procfile` for the sample app we've been working on:
 
 Now that you have a `Procfile`, you can start your application with the Foreman gem:
 
-		:::term
-		$ foreman start
+    :::term
+    $ foreman start
 
 Your app will come up on port 5000. Test that it's working with `curl` or a web browser, then Ctrl-C to exit.
+
+    :::term
+    $ curl http://localhost:5000/sushi.json
+    {"sushi":["Maguro","Hamachi","Uni","Saba","Ebi","Sake","Tai"]}
 
 ## Store Your App in Git
 
 The three major components of the web app are now in place: dependencies in `Gemfile`, process types in `Procfile`, and the application source in `api.rb`. Add everything into a new Git repository:
 
-		:::term
-		$ git init
-		$ git add .
-		$ git commit -m "init"
+    :::term
+    $ git init
+    $ git add .
+    $ git commit -m "init"
 
 ## Deploy to Heroku/Cedar
 
 Create the app on the Cedar stack:
 
-		:::term
-		$ heroku create --stack cedar
+    :::term
+    $ heroku create --stack cedar
 
 Deploy your code:
 
-		::term
-		$ git push heroku master
-		Counting objects: 6, done.
-		Delta compression using up to 4 threads.
-		Compressing objects: 100% (5/5), done.
-		Writing objects: 100% (6/6), 660 bytes, done.
-		Total 6 (delta 0), reused 0 (delta 0)
+    ::term
+    $ git push heroku master
+    Counting objects: 6, done.
+    Delta compression using up to 4 threads.
+    Compressing objects: 100% (5/5), done.
+    Writing objects: 100% (6/6), 660 bytes, done.
+    Total 6 (delta 0), reused 0 (delta 0)
 
-		-----> Heroku receiving push
-		-----> Ruby app detected
+    -----> Heroku receiving push
+    -----> Ruby app detected
     ...
-		-----> Compiled slug size is 6.3MB
-		-----> Launching... done, v4
-		       http://morning-wind-6672.herokuapp.com deployed to Heroku
+    -----> Compiled slug size is 6.3MB
+    -----> Launching... done, v4
+           http://morning-wind-6672.herokuapp.com deployed to Heroku
 
-		To git@heroku.com:morning-wind-6672.git
-		 * [new branch]      master -> master
+    To git@heroku.com:morning-wind-6672.git
+     * [new branch]      master -> master
 		 
 
 Test that your application is running with `curl` or a web browser:
 
-		:::term
-		$ curl http://myapp.herokuapp.com/sushi.json
-		{"sushi":["Maguro","Hamachi","Uni","Saba","Ebi","Sake","Tai"]}
+    :::term
+    $ curl http://myapp.herokuapp.com/sushi.json
+    {"sushi":["Maguro","Hamachi","Uni","Saba","Ebi","Sake","Tai"]}
 
 ## Create Your iOS Client App
 
@@ -152,32 +153,32 @@ CocoaPods manages library dependencies for your Xcode project, similar to the wa
 
 CocoaPods runs on [MacRuby](http://www.macruby.org/). If you don't have MacRuby 0.10 or newer installed, you can install it by doing:
 
-		:::term
-		$ curl -O http://www.macruby.org/files/MacRuby%200.10.zip
-		$ open MacRuby%200.10.zip
-		# open MacRuby\ 0.10/MacRuby\ 0.10.pkg
+    :::term
+    $ curl -O http://www.macruby.org/files/MacRuby%200.10.zip
+    $ open MacRuby%200.10.zip
+    # open MacRuby\ 0.10/MacRuby\ 0.10.pkg
 
 Now install CocoaPods:
 
-		:::term
-		$ sudo macgem install cocoapods
-		$ pod setup
+    :::term
+    $ sudo macgem install cocoapods
+    $ pod setup
 
 CocoaPods dependencies are declared in `Podfile`. In this case, [AFNetworking](https://github.com/AFNetworking/AFNetworking) will be used to communicate with the web API. Copy the following `Podfile` in the root of your iOS project:
 
-### Podfile
+#### Podfile
 
-		:::ruby
-		platform :ios
-		dependency 'AFNetworking', '0.9'
+    :::ruby
+    platform :ios
+    dependency 'AFNetworking', '0.9'
 
 Run `pod install MyApp.xcodeproj` to setup the dependencies:
 
-:::term
-$ pod install MyApp.xcodeproj
-Installing AFNetworking (0.9.0)
-Generating support files
-[!] From now on use `MyApp.xcworkspace' instead of `MyApp.xcodeproj'.
+    :::term
+    $ pod install MyApp.xcodeproj
+    Installing AFNetworking (0.9.0)
+    Generating support files
+    [!] From now on use `MyApp.xcworkspace' instead of `MyApp.xcodeproj'.
 
 Following the instructions from CocoaPods, close `MyApp.xcodeproj` and open `MyApp.xcworkspace`. This workspace file contains the build targets for your project as well as its dependencies.
 
@@ -195,7 +196,7 @@ When prompted to choose a template for your new file, select iOS  - Cocoa Touch 
 
 In the header, add a `sushi` property to store the results received from the server.
 
-### SushiTableViewController.h
+#### SushiTableViewController.h
 
     :::objective-c
     #import <UIKit/UIKit.h>
@@ -206,7 +207,7 @@ In the header, add a `sushi` property to store the results received from the ser
 
 Switching to the implementation, now `@synthesize` the `sushi` property, request the JSON in `-viewDidLoad`, and implement the required methods in `UITableViewDataSource`:
 
-### SushiTableViewController.m
+#### SushiTableViewController.m
 
     :::objective-c
     #import "SushiTableViewController.h"
@@ -269,7 +270,7 @@ With the table view controller finished, hook it up to the App Delegate to be di
 
 Add a `navigationController` property to `AppDelegate.h`:
 
-### AppDelegate.h
+#### AppDelegate.h
 
     :::objective-c
     #import <UIKit/UIKit.h>
@@ -283,7 +284,7 @@ Add a `navigationController` property to `AppDelegate.h`:
 
 In the implementation, import `SushiTableViewController.h`. Then in `application:didFinishLaunchingWithOptions`, instantiate an instance of the table view controller, set it as the root view controller for a navigation controller, and add the navigation controller view to the application window.
 
-### AppDelegate.m
+#### AppDelegate.m
 
     :::objective-c
     @implementation AppDelegate
@@ -345,7 +346,7 @@ In `SushiTableViewController.m`, the URL endpoint for the server is stored in th
     static NSString * const kMyAppBaseURLString = @"http://morning-wind-6672.herokuapp.com/";
     #endif
 
-<tt>kMyAppBaseURLString</tt> is still a string constant, but now it's value will be determined at compile-time, according to which build target is active: <tt>localhost:5000</tt> if on the simulator, and the Heroku URL when on the device.
+`kMyAppBaseURLString` is still a string constant, but now it's value will be determined at compile-time, according to which build target is active: <tt>localhost:5000</tt> if on the simulator, and the Heroku URL when on the device.
 
 ## Next Steps
 
