@@ -198,7 +198,7 @@ In the header, add a `sushi` property to store the results received from the ser
 
 #### SushiTableViewController.h
 
-    :::objective-c
+    :::c
     #import <UIKit/UIKit.h>
 
     @interface SushiTableViewController : UITableViewController
@@ -209,7 +209,7 @@ Switching to the implementation, now `@synthesize` the `sushi` property, request
 
 #### SushiTableViewController.m
 
-    :::objective-c
+    :::c
     #import "SushiTableViewController.h"
 
     #import "AFJSONRequestOperation.h"
@@ -272,7 +272,7 @@ Add a `navigationController` property to `AppDelegate.h`:
 
 #### AppDelegate.h
 
-    :::objective-c
+    :::c
     #import <UIKit/UIKit.h>
 
     @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -286,7 +286,7 @@ In the implementation, import `SushiTableViewController.h`. Then in `application
 
 #### AppDelegate.m
 
-    :::objective-c
+    :::c
     @implementation AppDelegate
     @synthesize window = _window;
     @synthesize navigationController = _navigationController;
@@ -339,7 +339,7 @@ To fix this, select your project file at the top of the Source Navigator, select
 
 In `SushiTableViewController.m`, the URL endpoint for the server is stored in the string constant <tt>kMyAppBaseURLString</tt>. Rather than manually switching between `localhost` and the Heroku URL when going between development and production, you can use a compiler macro to define the value dynamically:
 
-    :::objective-c
+    :::c
     #if TARGET_IPHONE_SIMULATOR
     static NSString * const kMyAppBaseURLString = @"http://localhost:5000/";
     #else
