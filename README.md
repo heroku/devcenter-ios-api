@@ -1,3 +1,5 @@
+*This article has been published on the [Heroku Dev Center](http://devcenter.heroku.com/articles/getting-started-ios-development-sinatra-cedar)*
+
 This quickstart will have you up and running with a native iOS application that consumes a web API with [Sinatra](http://www.sinatrarb.com/). For additional resources about Sinatra, please see the [Ruby quickstart](http://devcenter.heroku.com/articles/ruby).
 
 {.note}
