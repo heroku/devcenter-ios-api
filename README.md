@@ -62,6 +62,7 @@ Here's an example `Gemfile` for the Sinatra app created above:
     source :rubygems
     gem 'sinatra', '1.3.0'
     gem 'thin', '1.2.7'
+    gem 'json', '1.7.3'
 
 Run `bundle install` to set up you bundle locally
 
@@ -151,19 +152,12 @@ Finally, select a directory to save your new project to, check the box to create
 Instead of using CocoaPods to manage dependencies, you could also install AFNetworking manually. <a href="https://github.com/AFNetworking/AFNetworking/tarball/0.9.0" title="Download AFNetworking">Download the latest release</a> and add the enclosed "AFNetworking" directory to your project folder.
 </div>
 
-CocoaPods manages library dependencies for your Xcode project, similar to the way Bundler manages Ruby gem dependencies.
-
-CocoaPods runs on [MacRuby](http://www.macruby.org/). If you don't have MacRuby 0.10 or newer installed, you can install it by doing:
-
-    :::term
-    $ curl -O http://www.macruby.org/files/MacRuby%200.10.zip
-    $ open MacRuby%200.10.zip
-    $ open MacRuby\ 0.10/MacRuby\ 0.10.pkg
+[CocoaPods](http://cocoapods.org/) manages library dependencies for your Xcode project, similar to the way Bundler manages Ruby gem dependencies.
 
 Now install CocoaPods:
 
     :::term
-    $ sudo macgem install cocoapods
+    $ gem install cocoapods
     $ pod setup
 
 CocoaPods dependencies are declared in `Podfile`. In this case, [AFNetworking](https://github.com/AFNetworking/AFNetworking) will be used to communicate with the web API. Copy the following `Podfile` in the root of your iOS project:
@@ -325,9 +319,9 @@ In Xcode, click the "Run" play button, or use the keyboard shortcut, `⌘R`. If 
 
 If you push up your app and it crashes (`heroku ps` shows state `crashed`), check your logs with `heroku logs` to find out what went wrong.
 
-### Failed to require a sourcefile
+### Failed to require a source file
 
-If your Sinatra app failed to require a sourcefile, chances are good you’re running Ruby 1.9.1 or 1.8 in your local environment. The load paths have changed in Ruby 1.9. Port your app forward to Ruby 1.9.2 making certain it works locally before trying to push to Cedar again.
+If your Sinatra app failed to require a source file, chances are good you’re running Ruby 1.9.1 or 1.8 in your local environment. The load paths have changed in Ruby 1.9. Port your app forward to Ruby 1.9.2 making certain it works locally before trying to push to Cedar again.
 
 ### Unable to build Xcode project
 
